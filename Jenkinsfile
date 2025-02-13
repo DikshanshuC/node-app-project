@@ -149,8 +149,8 @@ pipeline {
         FRONTEND_REPO = '557690623737.dkr.ecr.ap-south-1.amazonaws.com/frontend-repo'
         BACKEND_REPO = '557690623737.dkr.ecr.ap-south-1.amazonaws.com/node-app-repo'
         MYSQL_REPO = '557690623737.dkr.ecr.ap-south-1.amazonaws.com/mysql-repo'
-        AWS_ACCESS_KEY_ID = 'AKIAYDWHTS344ZGIFLJP'
-        AWS_SECRET_ACCESS_KEY = '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'
+        AWS_ACCESS_KEY_ID = 'AKIAYDWHTS346SICR754'
+        AWS_SECRET_ACCESS_KEY = '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'
     }
 
     stages {
@@ -162,14 +162,14 @@ pipeline {
 
         stage('Login to AWS ECR') {
             steps {
-                withEnv(["AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY"]) {
+                // withEnv(["AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY"]) {
                     sh '''
                     aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 557690623737.dkr.ecr.ap-south-1.amazonaws.com
                     aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $FRONTEND_REPO
                     aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $BACKEND_REPO
                     aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $MYSQL_REPO
                     '''
-                }
+                // }
             }
         }
     }
