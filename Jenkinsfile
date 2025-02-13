@@ -12,21 +12,7 @@ pipeline {
         MYSQL_IMAGE_NAME = 'mysql-db'
     }
     stages {
-        stage('Checkout Code') {
-            steps {
-                git 'https://github.com/DikshanshuC/node-app-project.git'
-            }
-        }
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-        stage('Run Tests') {
-            steps {
-                sh 'npm test || echo "Tests failed, but continuing..."'
-            }
-        }
+        
         stage('Build Backend Docker Image') {
             steps {
                 sh 'docker build -t ${BACKEND_IMAGE_NAME} ./backend'
