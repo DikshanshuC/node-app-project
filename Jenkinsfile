@@ -327,7 +327,7 @@ pipeline {
                 docker run -d -p 3000:3000 --name ${BACKEND_REPO} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest &&
                 docker stop ${FRONTEND_REPO} || true &&
                 docker rm ${FRONTEND_REPO} || true &&
-                docker run -d -p 80:80 --name ${FRONTEND_REPO} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${FRONTEND_REPO}:latest &&
+                docker run -d -p 8000:8000 --name ${FRONTEND_REPO} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${FRONTEND_REPO}:latest &&
                 docker stop ${MYSQL_REPO} || true &&
                 docker rm ${MYSQL_REPO} || true &&
                 docker run -d -p 3306:3306 --name ${MYSQL_REPO} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${MYSQL_REPO}:latest"
