@@ -278,7 +278,7 @@ pipeline {
 
         stage('Build Frontend Docker Image') {
             steps {
-                sh 'docker build -t ${FRONTEND_REPO}:latest ./frontend'
+                sh 'docker build -t ${FRONTEND_REPO}:latest ./frontEnd'
             }
         }
 
