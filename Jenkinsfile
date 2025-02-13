@@ -239,7 +239,7 @@
 // // }
 
  
-
+ 
 pipeline {
     agent any
 
@@ -291,11 +291,11 @@ pipeline {
         stage('Tag & Push Backend Image to ECR') {
             steps {
                 sh '''
-                // docker tag ${BACKEND_REPO}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest
-                // docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest
-                // 
-                   docker tag backend-image:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest
-                   docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest
+                docker tag ${BACKEND_REPO}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest
+                docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest
+                
+                   // docker tag backend-image:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest
+                   // docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest
                     '''
                     
             }
@@ -326,26 +326,26 @@ pipeline {
                 docker pull ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest &&
                 docker pull ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${FRONTEND_REPO}:latest &&
                 docker pull ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${MYSQL_REPO}:latest &&
-                // docker stop ${BACKEND_REPO} || true &&
-                // docker rm ${BACKEND_REPO} || true &&
-                // docker run -d -p 3000:3000 --name ${BACKEND_REPO} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest &&
-                docker stop backend-container || true
-                docker rm backend-container || true
-                docker run -d -p 3000:3000 --name backend-container ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest
+                docker stop ${BACKEND_REPO} || true &&
+                docker rm ${BACKEND_REPO} || true &&
+                docker run -d -p 3000:3000 --name ${BACKEND_REPO} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest &&
+                // docker stop backend-container || true
+                // docker rm backend-container || true
+                // docker run -d -p 3000:3000 --name backend-container ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${BACKEND_REPO}:latest
 
-                // docker stop ${FRONTEND_REPO} || true &&
-                // docker rm ${FRONTEND_REPO} || true &&
-                // docker run -d -p 8000:8000 --name ${FRONTEND_REPO} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${FRONTEND_REPO}:latest &&
-                // docker stop ${MYSQL_REPO} || true &&
-                // docker rm ${MYSQL_REPO} || true &&
-                // docker run -d -p 3306:3306 --name ${MYSQL_REPO} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${MYSQL_REPO}:latest"
-                docker stop frontend-container || true
-                docker rm frontend-container || true
-                docker run -d -p 8000:8000 --name frontend-container ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${FRONTEND_REPO}:latest
+                docker stop ${FRONTEND_REPO} || true &&
+                docker rm ${FRONTEND_REPO} || true &&
+                docker run -d -p 8000:8000 --name ${FRONTEND_REPO} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${FRONTEND_REPO}:latest &&
+                docker stop ${MYSQL_REPO} || true &&
+                docker rm ${MYSQL_REPO} || true &&
+                docker run -d -p 3306:3306 --name ${MYSQL_REPO} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${MYSQL_REPO}:latest"
+                // docker stop frontend-container || true
+                // docker rm frontend-container || true
+                // docker run -d -p 8000:8000 --name frontend-container ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${FRONTEND_REPO}:latest
 
-                docker stop mysql-container || true
-                docker rm mysql-container || true
-                docker run -d -p 3306:3306 --name mysql-container -e MYSQL_ROOT_PASSWORD=root ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${MYSQL_REPO}:latest
+                // docker stop mysql-container || true
+                // docker rm mysql-container || true
+                // docker run -d -p 3306:3306 --name mysql-container -e MYSQL_ROOT_PASSWORD=root ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${MYSQL_REPO}:latest
 
                  '''
             }
