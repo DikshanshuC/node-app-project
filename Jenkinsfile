@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Build Frontend Docker Image') {
             steps {
-                sh 'docker build -t ${FRONTEND_IMAGE_NAME} ./frontend'
+                sh 'docker build -t ${FRONTEND_IMAGE_NAME} ./frontEnd'
             }
         }
         stage('Build MySQL Docker Image') {
