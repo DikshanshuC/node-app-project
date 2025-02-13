@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Build Backend Docker Image') {
             steps {
-                sh 'docker build -t ${BACKEND_IMAGE_NAME} .'
+                sh 'docker build -t ${BACKEND_IMAGE_NAME} ./backend'
             }
         }
         stage('Build Frontend Docker Image') {
