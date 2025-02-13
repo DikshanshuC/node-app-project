@@ -247,7 +247,7 @@ pipeline {
         AWS_REGION = 'ap-south-1'
         AWS_ACCOUNT_ID = '557690623737'
         FRONTEND_REPO = '557690623737.dkr.ecr.ap-south-1.amazonaws.com/frontend-repo'
-        BACKEND_REPO = '557690623737.dkr.ecr.ap-south-1.amazonaws.com/node-app-repo'
+        BACKEND_REPO = '557690623737.dkr.ecr.ap-south-1.amazonaws.com/backend-repo'
         MYSQL_REPO = '557690623737.dkr.ecr.ap-south-1.amazonaws.com/mysql-repo'
         AWS_ACCESS_KEY_ID = 'AKIAYDWHTS346SICR754'
         AWS_SECRET_ACCESS_KEY = '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'
@@ -278,7 +278,7 @@ pipeline {
 
         stage('Build Frontend Docker Image') {
             steps {
-                sh 'docker build -t ${FRONTEND_REPO}:latest ./frontEnd'
+                sh 'docker build -t ${FRONTEND_REPO}:latest ./frontend'
             }
         }
 
