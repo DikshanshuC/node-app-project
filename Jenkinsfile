@@ -75,7 +75,6 @@ pipeline {
         stage('Deploy to Server') {
             steps {
                 sh '''
-                ssh -o StrictHostKeyChecking=no ec2-user@your-server-ip "
                 aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com &&
                 
                 docker pull ${BACKEND_REPO}:latest &&
