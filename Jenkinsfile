@@ -77,11 +77,11 @@ pipeline {
                 
                 docker stop backend || true &&
                 docker rm backend || true &&
-                docker run -d -p 3000:3000 --name backend --restart unless-stopped ${BACKEND_REPO}:latest &&
+                docker run -d -p 8000:8000 --name backend --restart unless-stopped ${BACKEND_REPO}:latest &&
                 
                 docker stop frontend || true &&
                 docker rm frontend || true &&
-                docker run -d -p 8000:8000 --name frontend --restart unless-stopped ${FRONTEND_REPO}:latest &&
+                docker run -d -p 5000:5000 --name frontend --restart unless-stopped ${FRONTEND_REPO}:latest &&
                 
                 docker stop mysql || true &&
                 docker rm mysql || true &&
