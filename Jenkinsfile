@@ -50,23 +50,17 @@ pipeline {
             parallel {
                 stage('Push Backend Image') {
                     steps {
-                        sh '''
-                            docker push ${BACKEND_REPO}:latest
-                        '''
+                        sh 'docker push ${BACKEND_REPO}:latest'
                     }
                 }
                 stage('Push Frontend Image') {
                     steps {
-                        sh '''
-                            docker push ${FRONTEND_REPO}:latest
-                        '''
+                        sh 'docker push ${FRONTEND_REPO}:latest'
                     }
                 }
                 stage('Push MySQL Image') {
                     steps {
-                        sh '''
-                            docker push ${MYSQL_REPO}:latest
-                        '''
+                        sh 'docker push ${MYSQL_REPO}:latest'
                     }
                 }
             }
@@ -91,7 +85,7 @@ pipeline {
                 
                 docker stop mysql || true &&
                 docker rm mysql || true &&
-                docker run -d -p 3306:3306 --name mysql --restart unless-stopped ${MYSQL_REPO}:latest"
+                docker run -d -p 3306:3306 --name mysql --restart unless-stopped ${MYSQL_REPO}:latest
                 '''
             }
         }
